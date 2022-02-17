@@ -1,0 +1,42 @@
+{
+	"id": "item_1ypbroE658n4ea",
+	"product_id": "prod_LvJjoPVRK8le0n",
+	"name": "Logitech G915 TKL",
+	"product_name": "Logitech G915 TKL",
+	"sku": null,
+	"permalink": "LR6qiZ",
+	"quantity": 2,
+	"price": {
+		"raw": 189,
+		"formatted": "189.00",
+		"formatted_with_symbol": "$189.00",
+		"formatted_with_code": "189.00 USD"
+	},
+	"line_total": {
+		"raw": 378,
+		"formatted": "378.00",
+		"formatted_with_symbol": "$378.00",
+		"formatted_with_code": "378.00 USD"
+	},
+	"is_valid": true,
+	"product_meta": [],
+	"selected_options": [],
+	"variant": null,
+	"image": {
+		"id": "ast_Kvg9l61nKy51bB",
+		"url": "https://cdn.chec.io/merchants/38900/assets/9yz2K1rdWXtMyYcb|2.jpg",
+		"description": null,
+		"is_image": true,
+		"filename": "2.jpg",
+		"file_size": 89114,
+		"file_extension": "jpg",
+		"image_dimensions": {
+			"width": 1339,
+			"height": 684
+		},
+		"meta": [],
+		"created_at": 1644521586,
+		"updated_at": 1644521587
+	},
+	"tax": null
+}
