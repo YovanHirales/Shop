@@ -167,7 +167,7 @@ function App() {
 					exact
 					path='/checkout'
 					element={
-						isAuthenticated ? <Checkout /> : <Navigate to='/login/cart' />
+						isAuthenticated ? <Checkout /> : <Navigate to='/login/checkout' />
 					}
 				/>
 			</Routes>

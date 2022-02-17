@@ -5,9 +5,10 @@ export default makeStyles(() => ({
 	container: {
 		display: 'flex',
 		justifyContent: 'space-between',
+		marginTop: '25px',
 	},
 	box: {
-		width: '55vw',
+		width: '60vw',
 	},
 
 	//Cart Item

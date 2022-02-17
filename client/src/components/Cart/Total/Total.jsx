@@ -15,7 +15,7 @@ function Total({ cart, handleEmptyCart }) {
 	const onEmpty = () => handleEmptyCart();
 
 	return (
-		<Card className={classes.root} variant='outlined' elevation={3}>
+		<Card className={classes.root} variant='outlined'>
 			<CardContent>
 				<div className={classes.subtotal}>
 					<Typography variant='h5'>Subtotal</Typography>
@@ -28,8 +28,12 @@ function Total({ cart, handleEmptyCart }) {
 					<Typography variant='body1'>{cart.line_items.length}</Typography>
 				</div>
 			</CardContent>
-			<CardActions>
-				<Button variant='contained' onClick={onEmpty}>
+			<CardActions className={classes.cardActions}>
+				<Button
+					variant='contained'
+					sx={{ bgcolor: 'error.main' }}
+					onClick={onEmpty}
+				>
 					Remove All
 				</Button>
 				<Button variant='contained' component={Link} to='/checkout'>
