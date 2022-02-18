@@ -12,7 +12,7 @@ app.use(cors());
 app.use('/auth', require('./routes/jwtAuth'));
 
 //dashboard
-app.use('/dashboard', require('./routes/dashboard'));
+app.use('/user', require('./routes/user'));
 
 app.listen(PORT, () => {
 	console.log(`Mixin up port ${PORT}...`);
