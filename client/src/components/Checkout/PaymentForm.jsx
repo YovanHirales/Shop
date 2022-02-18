@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Typography, Button, Divider } from '@material-ui/core';
 import {
 	Elements,
@@ -9,9 +9,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 import Review from './Review';
 
-const stripePromise = loadStripe(
-	'pk_test_51KUFs3BbDcUE2hv3o1AYN2UkjXwDB5F6wFIOUkBJdWcHL6OtDHKbHns54zzX2Y6aXD2RFpSbu5dmWCvI7wt4zJE500VrFjpzYb'
-);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const PaymentForm = ({
 	checkoutToken,
@@ -20,6 +18,8 @@ const PaymentForm = ({
 	shippingData,
 	onCaptureCheckout,
 }) => {
+	console.log(shippingData);
+
 	const handleSubmit = async (event, elements, stripe) => {
 		event.preventDefault();
 
@@ -34,6 +34,7 @@ const PaymentForm = ({
 
 		if (error) {
 			console.log('[error]', error);
+			console.log('here');
 		} else {
 			const orderData = {
 				line_items: checkoutToken.live.line_items,
@@ -66,7 +67,7 @@ const PaymentForm = ({
 	};
 
 	return (
-		<>
+		<Fragment>
 			<Review checkoutToken={checkoutToken} />
 			<Divider />
 			<Typography variant='h6' gutterBottom style={{ margin: '20px 0' }}>
@@ -95,7 +96,7 @@ const PaymentForm = ({
 					)}
 				</ElementsConsumer>
 			</Elements>
-		</>
+		</Fragment>
 	);
 };
 
