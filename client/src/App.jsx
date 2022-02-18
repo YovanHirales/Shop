@@ -23,6 +23,11 @@ import { commerce } from './lib/commerce';
 
 //App
 function App() {
+	const [products, setProducts] = useState([]);
+	const [cart, setCart] = useState({});
+	const [order, setOrder] = useState({});
+	const [errorMessage, setErrorMessage] = useState('');
+	const [userInfo, setUserInfo] = useState({});
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	//Authentication
@@ -36,7 +41,6 @@ function App() {
 				method: 'GET',
 				headers: { token: localStorage.token },
 			});
-
 			const parseRes = await response.json();
 
 			parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
@@ -51,11 +55,21 @@ function App() {
 		setAuth(false);
 	};
 
-	//Commerce
+	const getName = async () => {
+		try {
+			const response = await fetch('http://localhost:5000/user/', {
+				method: 'GET',
+				headers: { token: localStorage.token },
+			});
+			const parseRes = await response.json();
 
-	//Product And Cart State
-	const [products, setProducts] = useState([]);
-	const [cart, setCart] = useState({});
+			setUserInfo(parseRes);
+		} catch (err) {
+			console.log('Not logged in');
+		}
+	};
+
+	//Commerce
 
 	//Fetch  Products
 	const fetchProducts = async () => {
@@ -97,10 +111,32 @@ function App() {
 		setCart(cart);
 	};
 
+	const refreshCart = async () => {
+		const newCart = await commerce.cart.refresh();
+
+		setCart(newCart);
+	};
+
+	const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+		try {
+			const incomingOrder = await commerce.checkout.capture(
+				checkoutTokenId,
+				newOrder
+			);
+
+			setOrder(incomingOrder);
+
+			refreshCart();
+		} catch (error) {
+			setErrorMessage(error.data.error.message);
+		}
+	};
+
 	useEffect(() => {
 		fetchProducts();
 		fetchCart();
 		isAuth();
+		getName();
 	}, []);
 
 	return (
@@ -149,6 +185,7 @@ function App() {
 							handleDeleteItem={handleDeleteItem}
 							handleEmptyCart={handleEmptyCart}
 							handleUpdateCart={handleUpdateCart}
+							totalItems={cart.total_items}
 						/>
 					}
 				/>
@@ -167,7 +204,17 @@ function App() {
 					exact
 					path='/checkout'
 					element={
-						isAuthenticated ? <Checkout /> : <Navigate to='/login/checkout' />
+						isAuthenticated ? (
+							<Checkout
+								cart={cart}
+								onCaptureCheckout={handleCaptureCheckout}
+								order={order}
+								error={errorMessage}
+								userInfo={userInfo}
+							/>
+						) : (
+							<Navigate to='/login/checkout' />
+						)
 					}
 				/>
 			</Routes>

@@ -15,12 +15,13 @@ const Register = ({ setAuth }) => {
 	};
 
 	const [inputs, setInputs] = useState({
-		name: '',
+		first_name: '',
+		last_name: '',
 		email: '',
 		password: '',
 	});
 
-	const { name, email, password } = inputs;
+	const { first_name, last_name, email, password } = inputs;
 
 	const onChange = (e) => {
 		setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -29,8 +30,8 @@ const Register = ({ setAuth }) => {
 	const onSubmitForm = async (e) => {
 		e.preventDefault();
 		try {
-			const body = { name, email, password };
-
+			const body = { first_name, last_name, email, password };
+			console.log(body);
 			const response = await fetch('http://localhost:5000/auth/register', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
@@ -58,14 +59,25 @@ const Register = ({ setAuth }) => {
 				</Grid>
 				<form onSubmit={onSubmitForm}>
 					<TextField
-						placeholder='Enter Username'
+						placeholder='Enter first name'
 						type='text'
-						name='name'
+						name='first_name'
 						fullWidth
 						variant='standard'
 						required
 						margin='normal'
-						value={name}
+						value={first_name}
+						onChange={(e) => onChange(e)}
+					/>
+					<TextField
+						placeholder='Enter last name'
+						type='text'
+						name='last_name'
+						fullWidth
+						variant='standard'
+						required
+						margin='normal'
+						value={last_name}
 						onChange={(e) => onChange(e)}
 					/>
 					<TextField

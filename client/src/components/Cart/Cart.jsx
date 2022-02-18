@@ -1,14 +1,42 @@
-import React, { Fragment, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Container, Typography, Button, Box } from '@mui/material';
+import { Grid, Container, Typography, Box } from '@mui/material';
 import useStyles from './styles';
 
 //Components
 import CartItem from './CartItem';
 import Total from './Total/Total';
 
-function Cart({ cart, handleEmptyCart, handleUpdateCart, handleDeleteItem }) {
+const Message = ({ message }) => (
+	<section>
+		<p>{message}</p>
+	</section>
+);
+
+function Cart({
+	cart,
+	handleEmptyCart,
+	handleUpdateCart,
+	handleDeleteItem,
+	totalItems,
+}) {
 	const classes = useStyles();
+	const [message, setMessage] = useState('');
+
+	useEffect(() => {
+		// Check to see if this is a redirect back from Checkout
+		const query = new URLSearchParams(window.location.search);
+
+		if (query.get('success')) {
+			setMessage('Order placed! You will receive an email confirmation.');
+		}
+
+		if (query.get('canceled')) {
+			setMessage(
+				"Order canceled -- continue to shop around and checkout when you're ready."
+			);
+		}
+	}, []);
 
 	const EmptyCart = () => (
 		<Typography variant='subtitle1'>
@@ -44,7 +72,9 @@ function Cart({ cart, handleEmptyCart, handleUpdateCart, handleDeleteItem }) {
 		</Box>
 	);
 
-	return (
+	return message ? (
+		<Message message={message} />
+	) : (
 		<Container>
 			<Typography variant='h3'>Your Shopping Cart</Typography>
 			{!cart.line_items.length || !cart ? <EmptyCart /> : <FilledCart />}
