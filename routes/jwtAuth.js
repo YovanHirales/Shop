@@ -59,7 +59,6 @@ router.post('/login', validInfo, async (req, res) => {
 		}
 
 		//check if incoming pass matches database pass
-
 		const validPassword = await bcrypt.compare(
 			password,
 			user.rows[0].user_password
@@ -70,7 +69,6 @@ router.post('/login', validInfo, async (req, res) => {
 		}
 
 		//give them jwt token
-
 		const token = jwtGenerator(user.rows[0].user_id);
 
 		res.json({ token });

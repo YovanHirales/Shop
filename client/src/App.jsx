@@ -37,7 +37,7 @@ function App() {
 
 	const isAuth = async () => {
 		try {
-			const response = await fetch('http://localhost:5000/auth/verify', {
+			const response = await fetch('/auth/verify', {
 				method: 'GET',
 				headers: { token: localStorage.token },
 			});
@@ -57,7 +57,7 @@ function App() {
 
 	const getName = async () => {
 		try {
-			const response = await fetch('http://localhost:5000/user/', {
+			const response = await fetch('/user/', {
 				method: 'GET',
 				headers: { token: localStorage.token },
 			});

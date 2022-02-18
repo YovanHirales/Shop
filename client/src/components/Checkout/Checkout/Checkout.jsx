@@ -8,7 +8,7 @@ import {
 	CircularProgress,
 	Divider,
 	Button,
-} from '@material-ui/core';
+} from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { commerce } from '../../../lib/commerce';
