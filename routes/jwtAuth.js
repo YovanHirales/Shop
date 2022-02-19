@@ -49,11 +49,11 @@ router.post('/login', validInfo, async (req, res) => {
 		// destructure req.body
 		const { email, password } = req.body;
 
-		// check if user exists
+		// check if email exists
 		const user = await pool.query('SELECT * FROM users WHERE user_email = $1', [
 			email,
 		]);
-
+		console.log(user);
 		if (user.rows.length === 0) {
 			return res.status(401).send('Password or Email is incorrect');
 		}
@@ -63,7 +63,7 @@ router.post('/login', validInfo, async (req, res) => {
 			password,
 			user.rows[0].user_password
 		);
-
+		console.log(validPassword);
 		if (!validPassword) {
 			return res.status(401).json('Password or Email is incorrect');
 		}

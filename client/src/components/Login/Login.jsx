@@ -43,14 +43,17 @@ function Login({ setAuth }) {
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(body),
 			});
+			console.log(response);
 
 			const parseRes = await response.json();
-
-			if (parseRes !== 'Invalid Email') {
+			console.log(parseRes.hasOwnProperty('token'));
+			if (parseRes.hasOwnProperty('token')) {
 				localStorage.setItem('token', parseRes.token);
 
 				setAuth(true);
-			} else setError(true);
+			} else {
+				setError(true);
+			}
 		} catch (err) {
 			setError(true);
 			console.log('error');
