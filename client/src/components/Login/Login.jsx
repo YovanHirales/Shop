@@ -43,10 +43,9 @@ function Login({ setAuth }) {
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(body),
 			});
-			console.log(response);
 
 			const parseRes = await response.json();
-			console.log(parseRes.hasOwnProperty('token'));
+
 			if (parseRes.hasOwnProperty('token')) {
 				localStorage.setItem('token', parseRes.token);
 

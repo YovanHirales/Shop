@@ -46,17 +46,17 @@ router.post('/register', validInfo, async (req, res) => {
 //login
 router.post('/login', validInfo, async (req, res) => {
 	try {
-		// // destructure req.body
-		// const { email, password } = req.body;
+		// destructure req.body
+		const { email, password } = req.body;
 
-		// // check if email exists
-		// const user = await pool.query('SELECT * FROM users WHERE user_email = $1', [
-		// 	email,
-		// ]);
+		// check if email exists
+		const user = await pool.query('SELECT * FROM users WHERE user_email = $1', [
+			email,
+		]);
 
-		// if (user.rows.length === 0) {
-		// 	return res.status(401).send('Password or Email is incorrect');
-		// }
+		if (user.rows.length === 0) {
+			return res.status(401).send('Password or Email is incorrect');
+		}
 
 		// //check if incoming pass matches database pass
 		// const validPassword = await bcrypt.compare(
@@ -71,7 +71,7 @@ router.post('/login', validInfo, async (req, res) => {
 		// //give them jwt token
 		// const token = jwtGenerator(user.rows[0].user_id);
 
-		res.json('hello');
+		res.json({ user });
 	} catch (err) {
 		console.log(err.message);
 		res.status(500).send('Server Error');
