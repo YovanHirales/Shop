@@ -20,12 +20,7 @@ const AddressForm = ({ checkoutToken, next, userInfo }) => {
 	const [shippingSubdivision, setShippingSubdivision] = useState('');
 	const [shippingOptions, setShippingOptions] = useState([]);
 	const [shippingOption, setShippingOption] = useState('');
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
-	const [userEmail, setUserEmail] = useState('');
 	const methods = useForm();
-
-	const { first_name, last_name, email } = userInfo;
 
 	const fetchShippingCountries = async (checkoutTokenId) => {
 		const { countries } = await commerce.services.localeListShippingCountries(
@@ -61,7 +56,7 @@ const AddressForm = ({ checkoutToken, next, userInfo }) => {
 
 	useEffect(() => {
 		fetchShippingCountries(checkoutToken.id);
-	}, []);
+	}, [checkoutToken]);
 
 	useEffect(() => {
 		if (shippingCountry) fetchSubdivisions(shippingCountry);
@@ -74,7 +69,7 @@ const AddressForm = ({ checkoutToken, next, userInfo }) => {
 				shippingCountry,
 				shippingSubdivision
 			);
-	}, [shippingSubdivision]);
+	}, [shippingSubdivision, checkoutToken, shippingCountry]);
 
 	return (
 		<Fragment>

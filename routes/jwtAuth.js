@@ -46,32 +46,32 @@ router.post('/register', validInfo, async (req, res) => {
 //login
 router.post('/login', validInfo, async (req, res) => {
 	try {
-		// destructure req.body
-		const { email, password } = req.body;
+		// // destructure req.body
+		// const { email, password } = req.body;
 
-		// check if email exists
-		const user = await pool.query('SELECT * FROM users WHERE user_email = $1', [
-			email,
-		]);
-		console.log(user);
-		if (user.rows.length === 0) {
-			return res.status(401).send('Password or Email is incorrect');
-		}
+		// // check if email exists
+		// const user = await pool.query('SELECT * FROM users WHERE user_email = $1', [
+		// 	email,
+		// ]);
 
-		//check if incoming pass matches database pass
-		const validPassword = await bcrypt.compare(
-			password,
-			user.rows[0].user_password
-		);
-		console.log(validPassword);
-		if (!validPassword) {
-			return res.status(401).json('Password or Email is incorrect');
-		}
+		// if (user.rows.length === 0) {
+		// 	return res.status(401).send('Password or Email is incorrect');
+		// }
 
-		//give them jwt token
-		const token = jwtGenerator(user.rows[0].user_id);
+		// //check if incoming pass matches database pass
+		// const validPassword = await bcrypt.compare(
+		// 	password,
+		// 	user.rows[0].user_password
+		// );
 
-		res.json({ token });
+		// if (!validPassword) {
+		// 	return res.status(401).json('Password or Email is incorrect');
+		// }
+
+		// //give them jwt token
+		// const token = jwtGenerator(user.rows[0].user_id);
+
+		res.json('hello');
 	} catch (err) {
 		console.log(err.message);
 		res.status(500).send('Server Error');
