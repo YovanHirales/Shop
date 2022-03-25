@@ -7,8 +7,14 @@ export default makeStyles(() => ({
 		justifyContent: 'space-between',
 		marginTop: '25px',
 	},
+	containerCol: {
+		display: 'flex',
+		flexDirection: 'column-reverse',
+		alignContent: 'center',
+		justifyContent: 'center',
+	},
 	box: {
-		width: '60vw',
+		width: '100%',
 	},
 
 	//Cart Item
@@ -18,9 +24,24 @@ export default makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'row',
 	},
+	rootCol: {
+		height: '250px',
+		width: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+		alignContent: 'center',
+	},
 	media: {
 		height: '100%',
 		width: '25%',
+		backgroundSize: 'contain',
+		backgroundRepeat: 'no-repeat',
+		marginLeft: '2%',
+		marginRight: '2%',
+	},
+	mediaCol: {
+		height: '200px',
+		width: '100%',
 		backgroundSize: 'contain',
 		backgroundRepeat: 'no-repeat',
 		marginLeft: '2%',

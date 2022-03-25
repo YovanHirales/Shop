@@ -16,24 +16,38 @@ import { ShoppingCart } from '@mui/icons-material';
 //Navbar Component
 const Navbar = ({ logout, totalItems, isAuthenticated }) => {
 	return (
-		<AppBar position='static' color='primary' sx={{ marginBottom: '2%' }}>
+		<AppBar
+			position='sticky'
+			sx={{ marginBottom: '2%', backgroundColor: '#2f3132' }}
+		>
 			<Toolbar>
+				{/* Home Text */}
 				<Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
 					<Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
-						Shop
+						MyKeyboard
 					</Link>
 				</Typography>
+
+				{/* Cart Text and Icon*/}
+				<Link to='/Cart' style={{ textDecoration: 'none', color: 'white' }}>
+					<IconButton aria-label='Show cart items' color='inherit'>
+						<Badge badgeContent={totalItems} color='success'>
+							<Typography style={{ marginRight: '0.5rem' }}>Cart</Typography>
+							<ShoppingCart />
+						</Badge>
+					</IconButton>
+				</Link>
+
+				{/* Login and Logout */}
 				{!isAuthenticated ? (
 					<Fragment>
 						<Link
-							to='/register'
-							style={{ textDecoration: 'none', color: 'white' }}
-						>
-							<Button color='inherit'>Register</Button>
-						</Link>
-						<Link
 							to='/login'
-							style={{ textDecoration: 'none', color: 'white' }}
+							style={{
+								textDecoration: 'none',
+								color: 'white',
+								marginLeft: '1rem',
+							}}
 						>
 							<Button color='inherit'>Login</Button>
 						</Link>
@@ -43,13 +57,6 @@ const Navbar = ({ logout, totalItems, isAuthenticated }) => {
 						Logout
 					</Button>
 				)}
-				<Link to='/Cart' style={{ textDecoration: 'none', color: 'white' }}>
-					<IconButton aria-label='Show cart items' color='inherit'>
-						<Badge badgeContent={totalItems} color='success'>
-							<ShoppingCart />
-						</Badge>
-					</IconButton>
-				</Link>
 			</Toolbar>
 		</AppBar>
 	);

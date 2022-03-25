@@ -8,9 +8,11 @@ import {
 } from '@mui/material';
 import React from 'react';
 import useStyles from './styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 function CartItem({ item, handleUpdateCart, handleDeleteItem, cart }) {
 	const classes = useStyles();
+	const matches = useMediaQuery('(max-width:800px)');
 
 	const onUpdateCart = (lineItemId, newQuantity) =>
 		handleUpdateCart(lineItemId, newQuantity);
@@ -18,9 +20,9 @@ function CartItem({ item, handleUpdateCart, handleDeleteItem, cart }) {
 	const onDeleteCartItem = (lineItemId) => handleDeleteItem(lineItemId);
 
 	return (
-		<Card className={classes.root}>
+		<Card className={matches ? classes.rootCol : classes.root}>
 			<CardMedia
-				className={classes.media}
+				className={matches ? classes.mediaCol : classes.media}
 				image={item.image.url}
 				title={item.name}
 			/>

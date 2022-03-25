@@ -1,10 +1,25 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Container, Grid, Paper, Typography } from '@mui/material';
 import Product from './Product';
+import useStyles from './styles';
 
 const Products = ({ products, handleAddToCart }) => {
+	const classes = useStyles();
+
 	return (
 		<main>
+			<Paper square elevation='0' className={classes.hero}>
+				<Container maxWidth='sm' className={classes.heroText}>
+					<Typography variant='h2' style={{ fontWeight: '700' }}>
+						KEYBOARDS
+					</Typography>
+					<Typography variant='body1'>
+						Shop wired and wireless keyboards. Choose from the mechanical,
+						ergonomic, comfort, portable, Bluetooth, multi-device, and multi-OS
+						product range.
+					</Typography>
+				</Container>
+			</Paper>
 			<Grid
 				container
 				justify='center'

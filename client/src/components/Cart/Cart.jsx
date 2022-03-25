@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Container, Typography, Box } from '@mui/material';
 import useStyles from './styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 //Components
 import CartItem from './CartItem';
@@ -22,6 +23,7 @@ function Cart({
 }) {
 	const classes = useStyles();
 	const [message, setMessage] = useState('');
+	const matches = useMediaQuery('(max-width:800px)');
 
 	useEffect(() => {
 		// Check to see if this is a redirect back from Checkout
@@ -52,7 +54,7 @@ function Cart({
 	if (!cart.line_items) return 'Loading...';
 
 	const FilledCart = () => (
-		<Box className={classes.container}>
+		<Box className={matches ? classes.containerCol : classes.container}>
 			<Box className={classes.box}>
 				<Grid container spacing={3}>
 					{cart.line_items.map((item) => (
